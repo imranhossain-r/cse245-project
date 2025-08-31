@@ -3,77 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tower of Hanoi Visualization</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Project Introduction</title>
+
+    <link rel="stylesheet" href="intro.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Tower of Hanoi Puzzle</h1>
-
-      <div class="controls">
-        <div class="input-group">
-          <label for="diskCount">Number of Disks (3-8):</label>
-          <input type="number" id="diskCount" min="1" max="8" value="3" />
-        </div>
-
-        <div class="button-group">
-          <button id="startBtn">Start Solving</button>
-          <button id="resetBtn">Reset</button>
-          <button id="pauseBtn" disabled>Pause</button>
-        </div>
-
-        <div class="speed-control">
-          <label for="speedSlider">Animation Speed:</label>
-          <input type="range" id="speedSlider" min="1" max="10" value="5" />
-          <span id="speedValue">5</span>
-        </div>
+    <div class="logo">
+      <img id="imglogo" src="uni.png" alt="University Logo" />
+    </div>
+    <div class="title">
+      <h1 class="subcode">CSE246 Project</h1>
+      <h1 class="name">Tower of Hanoi</h1>
+    </div>
+    <div class="flexingButton">
+      <button class="enter-btn" onclick="window.location.href='main.html'">
+        Enter
+      </button>
+    </div>
+    <div class="room">
+      <div class="students">
+        <h1 class="gp">Made by:</h1>
+        <ul class="made-by">
+          <li class="student">
+            <a href="https://github.com/imranhossain-r"
+              >Mohammad Imran Hossain Reshad</a
+            >
+          </li>
+          <li class="student">
+            <a href="">MD Asif Khan</a>
+          </li>
+          <li class="student">
+            <a href="https://github.com/sanbisensei">Zahin Shariar</a>
+          </li>
+        </ul>
+        <h1 id="sec">Section 4</h1>
       </div>
-
-      <div class="game-area">
-        <div class="tower-container">
-          <div class="tower" id="tower-A">
-            <div class="rod"></div>
-            <div class="base"></div>
-            <div class="label">Source (A)</div>
-          </div>
-
-          <div class="tower" id="tower-B">
-            <div class="rod"></div>
-            <div class="base"></div>
-            <div class="label">Auxiliary (B)</div>
-          </div>
-
-          <div class="tower" id="tower-C">
-            <div class="rod"></div>
-            <div class="base"></div>
-            <div class="label">Destination (C)</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-panel">
-        <div class="stats">
-          <div class="stat-item">
-            <span class="stat-label">Current Move:</span>
-            <span id="currentMove">0</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-label">Total Moves:</span>
-            <span id="totalMoves">0</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-label">Optimal Moves:</span>
-            <span id="optimalMoves">7</span>
-          </div>
-        </div>
-
-        <div class="move-log">
-          <h3>Move Sequence:</h3>
-          <div id="moveList"></div>
-        </div>
+      <div class="faculty">
+        <h1 class="gp">Submitted to:</h1>
+        <h1 class="n">Dr. Tania Sultana</h1>
+        <h1>Assistant Professor, Dept. of CSE</h1>
+        <h1 class="gp">East West University</h1>
       </div>
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>

@@ -15,8 +15,7 @@ let pauseBtn;
 let speedSlider;
 let speedValue;
 let currentMoveSpan;
-let totalMovesSpan;
-let optimalMovesSpan;
+let minMovesSpan;
 let moveList;
 let towerElements = {};
 
@@ -29,8 +28,7 @@ function initializeElements() {
   speedSlider = document.getElementById("speedSlider");
   speedValue = document.getElementById("speedValue");
   currentMoveSpan = document.getElementById("currentMove");
-  totalMovesSpan = document.getElementById("totalMoves");
-  optimalMovesSpan = document.getElementById("optimalMoves");
+  minMovesSpan = document.getElementById("minMoves");
   moveList = document.getElementById("moveList");
 
   towerElements.A = document.getElementById("tower-A");
@@ -47,7 +45,7 @@ function setupEventListeners() {
   speedSlider.addEventListener("input", function (e) {
     const speed = parseInt(e.target.value);
     speedValue.textContent = speed;
-    animationSpeed = 2000 - speed * 180; // Faster = lower delay
+    animationSpeed = 2000 - speed * 180;
   });
 
   diskCountInput.addEventListener("change", reset);
@@ -85,9 +83,9 @@ function reset() {
   updateStats();
   clearMoveLog();
 
-  // Calculate optimal moves
-  const optimalMoves = Math.pow(2, diskCount) - 1;
-  optimalMovesSpan.textContent = optimalMoves;
+  // Calculate min moves
+  const minMoves = Math.pow(2, diskCount) - 1;
+  minMovesSpan.textContent = minMoves;
 }
 
 // Create disks
@@ -109,30 +107,30 @@ function createDisks(count) {
 }
 
 // Recursive Tower of Hanoi algorithm
-function solveTowerOfHanoi(n, source, destination, auxiliary) {
+function solveTowerOfHanoi(n, source, destination, middle) {
   if (n === 1) {
     // Base case: move single disk
     moves.push({
       disk: 1,
       from: source,
       to: destination,
-      description: "Move disk 1 from " + source + " to " + destination,
+      description: "Move top disk from " + source + " to " + destination,
     });
   } else {
     // Recursive case:
-    // 1. Move n-1 disks from source to auxiliary
-    solveTowerOfHanoi(n - 1, source, auxiliary, destination);
+    // 1. Move n-1 disks from source to middle
+    solveTowerOfHanoi(n - 1, source, middle, destination);
 
     // 2. Move the largest disk from source to destination
     moves.push({
       disk: n,
       from: source,
       to: destination,
-      description: "Move disk " + n + " from " + source + " to " + destination,
+      description: "Move top disk from " + source + " to " + destination,
     });
 
-    // 3. Move n-1 disks from auxiliary to destination
-    solveTowerOfHanoi(n - 1, auxiliary, destination, source);
+    // 3. Move n-1 disks from middle to destination
+    solveTowerOfHanoi(n - 1, middle, destination, source);
   }
 }
 
@@ -271,16 +269,13 @@ function completeSolution() {
 
   // Show completion message
   alert(
-    "🎉 Puzzle solved in " +
-      moves.length +
-      " moves!\nOptimal solution achieved!"
+    "🎉 Puzzle solved in " + moves.length + " moves!\nmin solution achieved!"
   );
 }
 
 // Update stats
 function updateStats() {
   currentMoveSpan.textContent = currentMoveIndex;
-  totalMovesSpan.textContent = moves.length;
 }
 
 // Clear move log
